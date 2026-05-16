@@ -5,16 +5,17 @@ const connectDB = async () => {
     const uri = process.env.MONGO_URI;
 
     if (!uri) {
-      throw new Error("MONGO_URI is missing in .env file");
+      throw new Error("MONGO_URI not found in .env");
     }
 
-    const conn = await mongoose.connect(uri);
+    const conn = await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.error("MongoDB connection failed:", error.message);
-
-    // stop server if DB fails (important for production)
+    console.log("MongoDB Connected:", conn.connection.host);
+  } catch (err) {
+    console.error("MongoDB connection failed:", err.message);
     process.exit(1);
   }
 };
