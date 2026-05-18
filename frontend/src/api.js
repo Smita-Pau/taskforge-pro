@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://taskforge-pro-h1kc.vercel.app",
+  baseURL: "https://taskforge-pro-h1kc.vercel.app/api",
 });
 
 api.interceptors.request.use((config) => {
